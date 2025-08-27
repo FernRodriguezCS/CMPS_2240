@@ -1,0 +1,98 @@
+PC       = 4194340
+EPC      = 0
+Cause    = 0
+BadVAddr = 0
+Status   = 805371664
+
+HI       = 0
+LO       = 0
+
+R0  [r0] = 0
+R1  [at] = 0
+R2  [v0] = 10
+R3  [v1] = 0
+R4  [a0] = 1
+R5  [a1] = 2147483096
+R6  [a2] = 2147483104
+R7  [a3] = 0
+R8  [t0] = 8
+R9  [t1] = 15
+R10 [t2] = 120
+R11 [t3] = 0
+R12 [t4] = 0
+R13 [t5] = 0
+R14 [t6] = 0
+R15 [t7] = 0
+R16 [s0] = 0
+R17 [s1] = 0
+R18 [s2] = 0
+R19 [s3] = 0
+R20 [s4] = 0
+R21 [s5] = 0
+R22 [s6] = 0
+R23 [s7] = 0
+R24 [t8] = 0
+R25 [t9] = 0
+R26 [k0] = 0
+R27 [k1] = 0
+R28 [gp] = 268468224
+R29 [sp] = 2147483092
+R30 [s8] = 0
+R31 [ra] = 0
+
+
+User Text Segment [00400000]..[00440000]
+[00400000] 20080008  addi $8, $0, 8           ; 5: addi $8, $0, 8 # r8 which I will call a -> we are storing 8 in it since 8 + 0 = 8 
+[00400004] 2009000f  addi $9, $0, 15          ; 6: addi $9, $0, 15 # r9 which I will call b -> we are storing 15 in it since 15 + 0 = 15 
+[00400008] 00081020  add $2, $0, $8           ; 8: add $2, $0, $8 # r2 is storing r8 (copy) 
+[0040000c] 00005020  add $10, $0, $0          ; 9: add $10, $0, $0 # r10 is being set to 0 
+[00400010] 10400004  beq $2, $0, 16 [mulexit-0x00400010]
+[00400014] 2042ffff  addi $2, $2, -1          ; 13: addi $2, $2, -1 # r2 -= 1 || decrement r2 
+[00400018] 01495020  add $10, $10, $9         ; 14: add $10, $10, $9 # r10 = r10 + r9 
+[0040001c] 08100004  j 0x00400010 [mulloop]   ; 15: j mulloop # jump to the top of the loop again 
+[00400020] 2002000a  addi $2, $0, 10          ; 21: addi $2, $0, 10 # equal to li $v0 , 10 which means exit 
+[00400024] 0000000c  syscall                  ; 22: syscall 
+
+
+User data segment [10000000]..[10040000]
+[10000000]..[1003ffff]  00000000
+
+
+User Stack [7ffffdd4]..[80000000]
+[7ffffdd4]    00000001  7ffffe1b  00000000              . . . . . . . . . . . . 
+[7ffffde0]    7fffffec  7fffffd6  7fffffb0  7fffff8d    . . . . . . . . . . . . . . . . 
+[7ffffdf0]    7fffff76  7fffff34  7fffff19  7fffff0a    v . . . 4 . . . . . . . . . . . 
+[7ffffe00]    7ffffed1  7ffffeab  7ffffe6b  7ffffe5d    . . . . . . . . k . . . ] . . . 
+[7ffffe10]    00000000  00000000  2f000000  72657355    . . . . . . . . . . . / U s e r 
+[7ffffe20]    65662f73  72796e72  6972646f  7a657567    s / f e r n y r o d r i g u e z 
+[7ffffe30]    7365442f  706f746b  646f432f  2f676e69    / D e s k t o p / C o d i n g / 
+[7ffffe40]    6c6c6146  3230325f  4d432f35  325f5350    F a l l _ 2 0 2 5 / C M P S _ 2 
+[7ffffe50]    2f303432  3162616c  6d73612e  43505800    2 4 0 / l a b 1 . a s m . X P C 
+[7ffffe60]    414c465f  303d5347  58003078  535f4350    _ F L A G S = 0 x 0 . X P C _ S 
+[7ffffe70]    49565245  4e5f4543  3d454d41  6c707061    E R V I C E _ N A M E = a p p l 
+[7ffffe80]    74616369  2e6e6f69  2e6d6f63  7572616c    i c a t i o n . c o m . l a r u 
+[7ffffe90]    74712e73  6d697073  3239312e  34303533    s . q t s p i m . 1 9 2 3 5 0 4 
+[7ffffea0]    39312e32  33363432  5f003032  5f46435f    2 . 1 9 2 4 6 3 2 0 . _ _ C F _ 
+[7ffffeb0]    52455355  5845545f  4e455f54  49444f43    U S E R _ T E X T _ E N C O D I 
+[7ffffec0]    303d474e  35463178  3078303a  3078303a    N G = 0 x 1 F 5 : 0 x 0 : 0 x 0 
+[7ffffed0]    504d5400  3d524944  7261762f  6c6f662f    . T M P D I R = / v a r / f o l 
+[7ffffee0]    73726564  2f706a2f  36733339  73737632    d e r s / j p / 9 3 s 6 2 v s s 
+[7ffffef0]    63357334  6e37345f  79327976  72717872    4 s 5 c _ 4 7 n v y 2 y r x q r 
+[7fffff00]    30303030  542f6e67  4853002f  3d4c4c45    0 0 0 0 g n / T / . S H E L L = 
+[7fffff10]    6e69622f  68737a2f  4d4f4800  552f3d45    / b i n / z s h . H O M E = / U 
+[7fffff20]    73726573  7265662f  6f72796e  67697264    s e r s / f e r n y r o d r i g 
+[7fffff30]    007a6575  5f485353  48545541  434f535f    u e z . S S H _ A U T H _ S O C 
+[7fffff40]    702f3d4b  61766972  742f6574  632f706d    K = / p r i v a t e / t m p / c 
+[7fffff50]    612e6d6f  656c7070  75616c2e  6468636e    o m . a p p l e . l a u n c h d 
+[7fffff60]    63436a2e  424b4f66  2f763474  7473694c    . j C c f O K B t 4 v / L i s t 
+[7fffff70]    72656e65  4f4c0073  4d414e47  65663d45    e n e r s . L O G N A M E = f e 
+[7fffff80]    72796e72  6972646f  7a657567  54415000    r n y r o d r i g u e z . P A T 
+[7fffff90]    752f3d48  622f7273  2f3a6e69  3a6e6962    H = / u s r / b i n : / b i n : 
+[7fffffa0]    7273752f  6962732f  732f3a6e  006e6962    / u s r / s b i n : / s b i n . 
+[7fffffb0]    46435f5f  646e7542  6449656c  69746e65    _ _ C F B u n d l e I d e n t i 
+[7fffffc0]    72656966  6d6f633d  72616c2e  712e7375    f i e r = c o m . l a r u s . q 
+[7fffffd0]    69707374  4f43006d  4e414d4d  4f4d5f44    t s p i m . C O M M A N D _ M O 
+[7fffffe0]    753d4544  3278696e  00333030  52455355    D E = u n i x 2 0 0 3 . U S E R 
+[7ffffff0]    7265663d  6f72796e  67697264  007a6575    = f e r n y r o d r i g u e z . 
+
+
